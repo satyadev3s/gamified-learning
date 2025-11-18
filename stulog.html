@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoPlay Language & Age Setup</title>
+    <style>
+        body, html { margin:0; padding:0; height:100%; font-family: 'Arial', sans-serif; }
+        #app-container {
+            width:100%; height:100vh; display:flex; justify-content:center; align-items:flex-start;
+            padding-top:25px; box-sizing:border-box;
+            background: linear-gradient(180deg, #1b3d73 0%, #0056b3 35%, #007bff 70%, #0099ff 100%);
+        }
+        .content-card { width:90%; max-width:400px; padding:20px; background-color:rgba(255,255,255,0.1);
+            border-radius:25px; box-shadow:0 10px 30px rgba(0,0,0,0.3); color:white; }
+        .icon-header { background-color:#fce289; border-radius:15px; padding:15px 10px; display:flex;
+            justify-content:space-around; align-items:center; margin-bottom:30px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+        .icon-header span { font-size:2.5em; }
+        .progress-dots { display:flex; justify-content:center; margin-bottom:30px; gap:10px; }
+        .dot { height:10px; width:10px; border-radius:50%; background-color:rgba(255,255,255,0.4); }
+        .dot:nth-child(2) { background-color:#5b79ff; }
+        .input-section { padding:0 10px; }
+        h2 { font-size:1.5em; margin-top:0; margin-bottom:30px; text-align:center; }
+        form label { display:block; margin-top:20px; margin-bottom:8px; font-weight:600; }
+        input[type="text"], input[type="number"] { width:100%; padding:15px 15px; border:none; border-radius:10px;
+            font-size:1em; background-color:white; color:#333; box-sizing:border-box; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+        input::placeholder { color:#aaa; opacity:0.7; }
+        .button-group { display:flex; justify-content:space-between; margin-top:40px; gap:15px; }
+        .nav-button { flex-grow:1; padding:15px 10px; border:none; border-radius:10px; font-size:1em; font-weight:bold;
+            cursor:pointer; transition:background-color 0.2s; display:flex; align-items:center; justify-content:center;
+            gap:5px; background-color:#24dc40; color:white; }
+        .nav-button:hover { filter:brightness(1.1); }
+     .nav-back { background:#8d2f2f; color:#f3eeee; }
+        .nav-button.secondary { background:#ffd; color:#706363; }
+    </style>
+</head>
+<body><div id="app-container">
+    <div class="content-card">
+
+        <div class="icon-header" aria-hidden="true">
+            <span role="img" aria-label="Game Controller"  id="game1" class="game">🎮</span>
+            <span role="img" aria-label="Stack of Books">📚</span>
+            <span role="img" aria-label="Graduation Cap">🎓</span>
+        </div>
+
+        <div class="progress-dots" aria-hidden="true">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <div class="input-section">
+            <div style="text-align:center; margin-bottom:30px;">
+                <span role="img" aria-label="Glowing Game Controller" style="font-size:3em;" id="game2" class="game">🎮</span>
+            </div>
+
+            <h2 data-i18n="enter_details_title">Enter your detils 🌍</h2>
+
+            <form id="language-age-form" novalidate>
+
+                <label for="language-input" data-i18n="label_school">enter your school name</label>
+                <input type="text" id="language-input" 
+                       placeholder="choose your language"
+                       data-i18n-placeholder="ph_language" autocomplete="off">
+
+                <label for="age-input" data-i18n="label_age">Enter your age</label>
+                <input type="number" id="age-input" 
+                       placeholder="enter your age"
+                       data-i18n-placeholder="ph_age"
+                       min="1" max="120">
+
+            </form>
+
+            <div class="button-group">
+                <button class="nav-button nav-back" id="backBtn" type="button" data-i18n="btn_back">
+                    <span class="arrow">←</span> Back
+                </button>
+
+                <button class="nav-button" id="submit-button" type="button" data-i18n="btn_submit">
+                    submit <span class="arrow">→</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const submitButton = document.getElementById('submit-button');
+            const backBtn = document.getElementById('backBtn');
+
+            backBtn.addEventListener('click', (e) => {
+                // Navigate to teacher entry page
+                window.location.href = 'stutea.html';
+            });
+
+            submitButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                const language = document.getElementById('language-input').value.trim();
+                const age = document.getElementById('age-input').value.trim();
+
+                if (!language || !age) {
+                    alert('Please fill in both the language and age fields.');
+                    return;
+                }
+
+                // Save to sessionStorage for later use
+                sessionStorage.setItem('profileLanguage', language);
+                sessionStorage.setItem('profileAge', age);
+
+                // Redirect after successful input
+                window.location.href = 'dashboard.html';
+            });
+        });
+        game1.addEventListener('click', (e) => {
+            window.location.href = 'game1.html';
+        });
+         game2.addEventListener('click', (e) => {
+            window.location.href = 'game1.html';
+        });
+    </script>
+    <script src="lang.js"></script>
+
+</body>
+</html>

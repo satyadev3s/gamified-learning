@@ -1,0 +1,119 @@
+{
+  "role_student": "STUDENT",
+  "role_teacher": "TEACHER",
+
+  
+  "app_name": "ALGO PLAY",
+  "start_learning": "🚀 Start Learning",
+
+
+  "welcome_title": "Welcome to AlgoPlay!",
+  "welcome_subtitle": "Let's get to know you better",
+
+  "label_name": "Your Name",
+  "ph_fullname": "enter your full name",
+
+  "label_class": "Enter your class",
+  "ph_class": "enter your class",
+
+  "btn_back": "Back",
+  "btn_submit": "Submit",
+
+  "enter_details_title": "Choose your detils 🌍",
+   "label_school": "Enter your school name",
+  "ph_language": "choose your language",
+
+  "label_age": "Enter your age",
+  "ph_age": "enter your age",
+
+  "welcome_back": "Welcome Back",
+  "user_default_name": "User",
+  "level_default": "Level 0",
+  "points_default": "0 points",
+  "daily_goal": "Daily goal",
+  "streak_default": "0 days",
+
+  "learning_subjects": "📚 Learning Subjects",
+  "pick_subject": "Pick a subject to continue",
+
+  "math_title": "🔢 Mathematics — Quick Practice",
+  "math_desc": "Numbers, Algebra & Geometry · Recommended",
+
+  "science_title": "🧪 Science — Experiments",
+  "science_desc": "Physics, Chemistry & Biology · 8 lessons",
+
+  "tech_title": "💻 Technology — Coding & Logic",
+  "tech_desc": "Interactive coding tasks",
+
+  "btn_continue": "Continue learning →",
+  "btn_achievements": "🏆 Achievements",
+  "btn_logout": "Logout",
+  "chat_with_ai": "Chat with AI",
+
+  "quiz_question_number": "1. Question",
+  "quiz_q1_text": "What is the formula for calculating the area of a circle?",
+  "quiz_q1_a": "a) πr²",
+  "quiz_q1_b": "b) π",
+  "quiz_q1_c": "c) r²",
+  "quiz_q1_d": "d) 2πr",
+  "quiz_score": "Score:",
+  "quiz_back_btn": "← Back",
+  "quiz_next_btn": "Next →",
+
+  "quiz_question_text": "What is the process by which plants make their own food?",
+  "quiz_option_a": "a) Respiration",
+  "quiz_option_b": "b) Photosynthesis",
+  "quiz_option_c": "c) Digestion",
+  "quiz_option_d": "d) Fermentation",
+  "quiz_score_label": "Score",
+
+  "q_html_number": "💻 1. Question",
+  "q_html_title": "What does HTML stand for?",
+  "q_html_opt_a": "a) Hyper Text Markup Language",
+  "q_html_opt_b": "b) High Tech Modern Language",
+  "q_html_opt_c": "c) Home Tool Markup Language",
+  "q_html_opt_d": "d) Hyperlinks and Text Markup Language",
+  "q_html_score": "Score:",
+
+  "q_btn_back": "← Back",
+  "q_btn_next": "Next →",
+
+  "teacher_login_title": "TEACHER LOGIN",
+  "label_email": "Email address",
+  "ph_email": "enter your email",
+  "label_password": "Password",
+  "ph_password": "enter password",
+  "btn_login": "Login",
+  "login_note": "Use valid credentials to access the teacher dashboard.",
+
+  "td_title": "📊 Teacher Dashboard",
+  "td_meta": "Class 6-8 Performance Overview",
+  "td_profile": "👤",
+
+  "td_total_students": "Total Students",
+  "td_active_today": "Active Today",
+
+  "td_subject_perf": "Subject Performance",
+
+  "td_math": "Mathematics",
+  "td_science": "Science",
+  "td_tech": "Technology",
+
+  "td_individual_progress": "Individual Student Progress",
+
+  "td_th_name": "Name",
+  "td_th_grade": "Grade",
+  "td_th_progress": "Progress",
+  "td_th_hours": "Weekly Hours",
+  "td_th_status": "Status",
+
+  "td_excellent": "EXCELLENT",
+  "td_good": "GOOD",
+  "td_needs_help": "NEEDS HELP",
+  "td_average": "AVERAGE",
+
+  "td_quick_actions": "Quick Actions",
+  "td_view_reports": "📋 View Detailed Reports",
+  "td_send_update": "📢 Send Progress Update",
+  "td_manage_assignments": "✅ Manage Assignments"
+}

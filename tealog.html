@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Teacher Login — AlgoPlay</title>
+    <style>
+        :root{
+            --bg-top:#1E90FF;
+            --bg-bottom:#4682B4;
+            --accent:#00FF7F;
+            --card-bg: rgba(255,255,255,0.08);
+            --input-bg:#E9EEF7;
+        }
+        *{box-sizing:border-box}
+        body,html{height:100%;margin:0;font-family:Arial, Helvetica, sans-serif;background:linear-gradient(to bottom,var(--bg-top),var(--bg-bottom));color:#fff}
+        .page-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+        .card{width:100%;max-width:420px;background:var(--card-bg);border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,0.25);text-align:center}
+        .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+        .avatar img{width:80%;height:80%;object-fit:cover;display:block}
+        .title{font-size:20px;font-weight:700;color:#fff;margin:6px 0 14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px}
+        form{display:block;text-align:left}
+        label{display:block;color:#fff;font-weight:700;margin:12px 0 6px}
+        input[type="email"],input[type="password"]{width:100%;padding:12px 14px;border-radius:10px;border:none;font-size:15px;background:var(--input-bg);color:#1b2430}
+        .controls{display:flex;gap:12px;margin-top:18px}
+        .btn{flex:1;padding:12px 10px;border-radius:10px;border:none;font-weight:800;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,0.2)}
+        .btn-back{background:#ffffff;color:#000}
+        .btn-login{background:linear-gradient(90deg,#00FF7F,#00C57A);color:#000}
+        .muted{font-size:13px;color:rgba(255,255,255,0.8);margin-top:12px;text-align:center}
+        @media (max-width:420px){.card{padding:16px}.avatar{width:84px;height:84px}}
+    </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <div class="card" role="region" aria-labelledby="teacher-login-title">
+        <div class="avatar" aria-hidden="true">
+            <img src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'>
+                  <path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6 1.67-6 4v1h12v-1c0-2.33-2.67-4-6-4z'/>
+                </svg>" alt="Teacher avatar">
+        </div>
+
+        <div id="teacher-login-title" class="title" data-i18n="teacher_login_title">TEACHER LOGIN</div>
+
+        <form id="teacherLoginForm" novalidate>
+            <label for="email" data-i18n="label_email">Email address</label>
+            <input id="email" name="email" type="email" inputmode="email"
+                   placeholder="enter your email"
+                   data-i18n-placeholder="ph_email"
+                   required autocomplete="username" autofocus>
+
+            <label for="password" data-i18n="label_password">Password</label>
+            <input id="password" name="password" type="password"
+                   placeholder="enter password"
+                   data-i18n-placeholder="ph_password"
+                   required autocomplete="current-password">
+
+            <div class="controls" role="group" aria-label="Login actions">
+                <button type="button" class="btn btn-back" id="backBtn" data-i18n="btn_back">Back</button>
+                <button type="submit" class="btn btn-login" id="loginBtn" data-i18n="btn_login">Login</button>
+            </div>
+
+            <div class="muted" data-i18n="teacher_login_note">
+                Use valid credentials to access the teacher dashboard.
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script>
+        (function(){
+            const form = document.getElementById('teacherLoginForm');
+            const backBtn = document.getElementById('backBtn');
+
+            // Back button: go to stutea.html (teacher entry page)
+            backBtn.addEventListener('click', () => {
+                window.location.href = 'stutea.html';
+            });
+
+            // Form submit handler (prevents default and validates)
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                if (!email || !password) {
+                    alert('Please enter both email and password.');
+                    return;
+                }
+
+                // Basic email format check
+                const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                if (!emailValid) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                // Simulated successful login — redirect to teacher dashboard
+                window.location.href = 'teadash.html';
+            });
+        })();
+    </script>
+    <script src="lang.js"></script>
+
+</body>
+</html>

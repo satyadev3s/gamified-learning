@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo Play Splash Screen</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+        /* --- Global Reset & Container --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden; 
+        }
+
+        #splash-screen {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* Enhanced, deeper gradient background */
+            background: linear-gradient(180deg, 
+                #4b2de1 0%, 
+                #5e49b0 35%,
+                #49a3c9 80%,
+                #57aee0 100%
+            );
+            transition: opacity 0.5s ease-out;
+        }
+
+        /* --- Language Selector (Modernized) --- */
+        #language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        /* Wrapper for custom arrow (Needed to make the select look clean) */
+        .select-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        #language-selector select {
+            padding: 8px 35px 8px 15px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.7);
+            background-color: rgba(255,255,255,0.2); 
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            appearance: none; 
+            -webkit-appearance: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+            margin: 0;
+        }
+
+        #language-selector select:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        /* STYLES FOR OPTIONS (The list items when you click the dropdown) */
+        #language-selector option {
+            background-color: #5e49b0; 
+            color: white;
+            padding: 10px; 
+            border: none;
+        }
+        
+        #language-selector option:hover {
+            background-color: #49a3c9; 
+        }
+
+
+        /* Custom Dropdown Arrow using pseudo-element */
+        .select-wrapper::after {
+            content: '▼';
+            font-size: 0.8em;
+            color: white;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none; 
+        }
+
+        /* --- Logo Area --- */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* *** LOGO IMAGE STYLES *** */
+
+.logo-container {
+    width: 170px;
+    height: 170px;
+    padding: 10px;
+    border-radius: 22px;
+  margin-bottom:55px;
+    background: linear-gradient(135deg, #0f4c75, #3282b8, #bbe1fa);
+    background-size: 180% 180%;
+    animation: aiShift 8s ease infinite;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes aiShift {
+    0%   { background-position: 0% 0%; }
+    50%  { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+
+/* NEON GLOW BALLS — Advanced Floating */
+.ball {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(255,255,255,0.9), 
+        rgba(255,255,255,0.1)
+    );
+    box-shadow: 0 0 25px rgba(255,255,255,0.8),
+                0 0 60px rgba(255,255,255,0.3);
+    backdrop-filter: blur(3px);
+    pointer-events: none;
+    animation: moveBall linear infinite;
+    opacity: 0.55;
+}
+
+/* 3D Movement Path */
+@keyframes moveBall {
+    0% {
+        transform: translate(0,0) scale(1) rotate(0deg);
+    }
+    25% {
+        transform: translate(80px, -120px) scale(1.3) rotate(45deg);
+    }
+    50% {
+        transform: translate(-60px, 160px) scale(0.9) rotate(90deg);
+    }
+    75% {
+        transform: translate(120px, 40px) scale(1.4) rotate(135deg);
+    }
+    100% {
+        transform: translate(0,0) scale(1) rotate(180deg);
+    }
+}
+
+/* Neon Colors (each ball different) */
+.ball:nth-child(odd) {
+    background: radial-gradient(circle at 30% 30%, #ffffff, rgba(0,255,255,0.3));
+    box-shadow: 0 0 20px #19f3ff, 0 0 60px #19f3ff55;
+}
+
+.ball:nth-child(even) {
+    background: radial-gradient(circle at 30% 30%, #ffffff, rgba(255,0,255,0.3));
+    box-shadow: 0 0 20px #3868b5, 0 0 60px #47409c55;
+}
+
+/* Size randomness */
+.ball.small { width: 20px; height: 20px; }
+.ball.medium { width: 35px; height: 35px; }
+.ball.large { width: 55px; height: 55px; }
+.ball.xlarge { width: 75px; height: 75px; }
+
+        /* --- Start Button --- */
+        .start-button {
+            background: linear-gradient(to right, #20c997, #4ad2e3); 
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 60px; 
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 50px;
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.4);
+            transition: transform 0.2s, box-shadow 0.4s;
+            animation: shadowPulse 2s infinite ease-in-out; 
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(32, 201, 151, 0.6);
+            animation: none;
+        }
+
+        @keyframes shadowPulse {
+            0% { box-shadow: 0 8px 25px rgba(32, 201, 151, 0.4); }
+            50% { box-shadow: 0 10px 30px rgba(32, 201, 151, 0.7); }
+            100% { box-shadow: 0 8px 25px rgba(32, 201, 151, 0.4); }
+        }
+        
+
+        /* Soft floating balls */
+.ball {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: radial-gradient(circle, white, rgba(255,255,255,0.1));
+    opacity: 0.5;
+    animation: float 9s infinite ease-in-out;
+    pointer-events: none;
+}
+
+/* Smooth floating animation */
+@keyframes float {
+    0%   { transform: translate(0,0); opacity: 0.5; }
+    50%  { transform: translate(30px,-100px); opacity: 0.8; }
+    100% { transform: translate(0,0); opacity: 0.5; }
+}
+
+/* Random sizes */
+.ball.small  { width: 15px; height: 15px; }
+.ball.medium { width: 25px; height: 25px; }
+.ball.large  { width: 35px; height: 35px; }
+
+/* Light color tint (not neon, not dull) */
+.ball.c1 { background: radial-gradient(circle, #c74444, #173d4e33); }
+.ball.c2 { background: radial-gradient(circle, #aab949, #ffcaf733); }
+.ball.c3 { background: radial-gradient(circle, #c159aa, #baffc233); }
+#splash-screen {
+    background: linear-gradient(135deg, #6c40e5, #3b4fbf, #375de3);
+    background-size: 300% 300%;
+    animation: bgShift 14s ease-in-out infinite;
+}
+
+
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <div id="splash-screen">
+
+        <div id="language-selector">
+            <div class="select-wrapper">
+                <select onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="te">Telugu</option>
+                    <option value="hi">Hindi</option>
+                    <option value="ta">Tamil</option>
+                    <option value="kn">Kannada</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="logo-container">
+            <img class="logo-icon" src="logo.png" alt="Algo Play Logo">
+        </div>
+
+        <button class="start-button" onclick="startLearning()">
+            <span data-i18n="start_learning">START LEARNING</span>
+        </button>
+
+    </div>
+
+    <script src="lang.js"></script>
+
+    <script>
+        function startLearning() {
+            document.getElementById("splash-screen").style.opacity = "0";
+            setTimeout(() => {
+                window.location.href = 'stutea.html';
+            }, 500);
+        }
+
+        
+        
+function createSoftBalls() {
+    const screen = document.getElementById("splash-screen");
+
+    const sizes = ["small", "medium", "large"];
+    const colors = ["c1", "c2", "c3"];
+
+    for (let i = 0; i < 19; i++) {   // balanced number
+        let b = document.createElement("div");
+        b.classList.add("ball");
+
+        // random size & color
+        b.classList.add(sizes[Math.floor(Math.random()*sizes.length)]);
+        b.classList.add(colors[Math.floor(Math.random()*colors.length)]);
+
+        // random position
+        b.style.left = Math.random()*100 + "vw";
+        b.style.top = Math.random()*100 + "vh";
+
+        // smooth random speed
+        b.style.animationDuration = (6 + Math.random()*6) + "s";
+
+        screen.appendChild(b);
+    }
+}
+
+createSoftBalls();
+</script>
+</body>
+</html>

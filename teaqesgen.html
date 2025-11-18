@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard – Question Generator</title>
+
+<style>
+  :root{
+    --bg:#eef2ff;
+    --panel:#ffffff;
+    --accent:#2563eb;
+    --accent2:#66ba1c;
+    --radius:14px;
+    --shadow:0 6px 22px rgba(0,0,0,0.09);
+    --muted:#6b7280;
+  }
+
+  body{
+    margin:0;
+    font-family:Inter,system-ui;
+    background:var(--bg);
+    animation: fadeScreen 0.6s ease;
+  }
+
+  @keyframes fadeScreen {
+    from { opacity:0; }
+    to   { opacity:1; }
+  }
+
+  /* Wrapper */
+  .wrap{
+    max-width:1200px;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:20px;
+    padding:20px;
+  }
+
+  /* Header */
+  header{
+    grid-column:1/-1;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 20px;
+    background:white;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  header h1{
+    margin:0;
+    font-size:20px;
+    color:#111827;
+    font-weight:700;
+    animation: slideDown 0.5s ease;
+  }
+
+  @keyframes slideDown {
+    from { transform:translateY(-10px); opacity:0; }
+    to   { transform:translateY(0); opacity:1; }
+  }
+
+  /* Left Panel */
+  .panel{
+    background:white;
+    padding:20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    animation: fadeUp 0.6s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(12px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* File input */
+  input[type=file]{
+    padding:14px;
+    width:90%;
+    margin-top:10px;
+    margin-bottom:20px;
+    border:2px dashed #b4c8ff;
+    border-radius:var(--radius);
+    background:#ffffff;
+    cursor:pointer;
+    transition:0.25s;
+  }
+
+  input[type=file]:hover{
+    border-color:var(--accent);
+    transform:scale(1.02);
+  }
+
+  .btn{
+    padding:10px 14px;
+    border:0;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    background:var(--accent);
+    color:white;
+    transition:0.25s;
+  }
+
+  .btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 14px rgba(37,99,235,0.25);
+  }
+
+  .btn.secondary{
+    background:#eef2ff;
+    color:var(--accent);
+  }
+
+  .btn.secondary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 14px rgba(0,0,0,0.10);
+  }
+
+  select, input[type=number]{
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #d4d9e8;
+    background:white;
+    transition:0.2s;
+  }
+
+  select:hover, input[type=number]:hover{
+    border-color:var(--accent);
+  }
+
+  /* Status Box */
+  .statusbox{
+    margin-top:16px;
+    padding:12px;
+    border-radius:10px;
+    background:#f8faff;
+    border:1px solid #e6edff;
+    font-size:13px;
+    color:#1f2937;
+  }
+
+  /* Progress bar */
+  .progress{
+    height:7px;
+    background:#e6ebff;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:8px;
+    display:none;
+  }
+  .progress i{
+    height:100%;
+    width:0%;
+    background:linear-gradient(to right, var(--accent), var(--accent2));
+    display:block;
+    transition:width 0.25s linear;
+  }
+
+  /* Right Panel */
+  .right{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .card{
+    background:white;
+    padding:20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  .card h2{
+    margin:0;
+    font-size:19px;
+    color:#111827;
+    font-weight:700;
+  }
+
+  /* Question Card */
+  .q-card{
+    background:#ffffff;
+    border-radius:var(--radius);
+    padding:14px;
+    border:1px solid #eef2ff;
+    margin-bottom:12px;
+
+    animation: fadeUp 0.4s ease;
+  }
+
+  .q-card b{
+    font-size:15px;
+    color:#1f2937;
+  }
+
+  ol.choices{
+    margin-left:18px;
+  }
+
+  .answer{
+    margin-top:6px;
+    font-weight:700;
+    color:#2563eb;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <h1>Question Generator Dashboard</h1>
+    <div class="actions">
+      <button id="downloadPdf" class="btn secondary"> download PDF</button>
+    </div>
+  </header>
+
+  <!-- Left Panel -->
+  <div class="panel">
+
+    <div class="label-title">Upload PDF or Image</div>
+    <input type="file" id="fileInput" accept="application/pdf,image/*">
+
+    <div class="grid-opts" style="display:flex;gap:10px;margin-top:10px;">
+      <select id="mode">
+        <option value="all">Balanced</option>
+        <option value="mcq">MCQ Only</option>
+        <option value="cloze">Cloze Only</option>
+        <option value="short">Short Only</option>
+      </select>
+
+      <input id="maxQ" type="number" value="12" min="1" max="200">
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:10px;">
+      <button id="process" class="btn">Generate</button>
+      <button id="clear" class="btn secondary">Clear</button>
+    </div>
+
+    <div id="status" class="statusbox">
+      Waiting for input…
+      <div class="progress"><i></i></div>
+    </div>
+
+  </div>
+
+  <!-- Right Panel -->
+  <div class="right">
+    <div class="card">
+      <h2>Generated Questions</h2>
+      <div id="summary" style="font-size:13px;color:var(--muted);margin-top:6px">
+        No questions yet
+      </div>
+    </div>
+
+    <div id="qList"></div>
+  </div>
+<button id="backBtn" style="
+  padding:8px 14px;
+  background:#eef2ff;
+  color:#2563eb;
+  border:1px solid #cfd8ff;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+">
+  ← Back
+</button>
+
+</div>
+
+
+<!-- JS Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
+
+<script>
+document.getElementById("backBtn").onclick = () => {
+    window.location.href = "teadash.html";
+};
+
+
+const fileInput = document.getElementById("fileInput");
+const processBtn = document.getElementById("process");
+const clearBtn = document.getElementById("clear");
+const statusBox = document.getElementById("status");
+const progressBar = statusBox.querySelector(".progress");
+const progressFill = progressBar.querySelector("i");
+const qList = document.getElementById("qList");
+const summary = document.getElementById("summary");
+const modeEl = document.getElementById("mode");
+const maxQEl = document.getElementById("maxQ");
+
+function setStatus(msg){ statusBox.firstChild.textContent = msg; }
+function showProgress(f){ progressBar.style.display=f?"block":"none"; }
+function setProgress(p){ progressFill.style.width = p+"%"; }
+
+/* —————————————————————— PDF -> text —————————————————————— */
+async function extractPDFText(file){
+  const pdf = await pdfjsLib.getDocument(URL.createObjectURL(file)).promise;
+  let text = "";
+  for(let i=1; i<=pdf.numPages; i++){
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    text += content.items.map(t=>t.str).join(" ") + " ";
+  }
+  return text.trim();
+}
+
+/* —————————————————————— PDF -> Image for OCR —————————————————————— */
+async function pdfToImage(file){
+  const pdf = await pdfjsLib.getDocument(URL.createObjectURL(file)).promise;
+  const page = await pdf.getPage(1);
+  const canvas = document.createElement("canvas");
+  const vp = page.getViewport({scale:2});
+  canvas.width = vp.width;
+  canvas.height = vp.height;
+  await page.render({canvasContext:canvas.getContext("2d"), viewport:vp}).promise;
+  return new Promise(res => canvas.toBlob(res, "image/png"));
+}
+
+/* —————————————————————— OCR —————————————————————— */
+async function runOCR(img){
+  const worker = Tesseract.createWorker({
+    logger: m => { if(m.progress) setProgress(Math.round(m.progress*100)); }
+  });
+  await worker.load();
+  await worker.loadLanguage("eng");
+  await worker.initialize("eng");
+  const { data } = await worker.recognize(img);
+  await worker.terminate();
+  return data.text;
+}
+
+/* —————————————————————— Sentence Split —————————————————————— */
+function splitSentences(t){
+  return t.replace(/\n+/g,". ")
+          .split(/(?<=[.?!])\s+/)
+          .map(s=>s.trim())
+          .filter(s=>s.length > 12);
+}
+
+/* —————————————————————— Question Generator —————————————————————— */
+function generateQuestions(text){
+  const sents = splitSentences(text);
+  let out = [];
+
+  sents.forEach(s => {
+    // SHORT Question
+    out.push({
+      type:"short",
+      q:`Explain: ${s}`
+    });
+
+    // CLOZE
+    const w = s.split(" ");
+    if(w.length > 6){
+      let hidden = w[Math.floor(w.length/2)];
+      out.push({
+        type:"cloze",
+        q:s.replace(hidden, "_____"),
+        answer:hidden
+      });
+    }
+
+    // MCQ
+    out.push({
+      type:"mcq",
+      q:`Which statement is true about: "${s.substring(0,40)}..."?`,
+      choices:[ s, "Incorrect", "Opposite", "None" ],
+      answer:s
+    });
+  });
+
+  /* ————— Mode Filtering ————— */
+  const mode = modeEl.value;
+
+  if(mode === "mcq") out = out.filter(q=>q.type==="mcq");
+  if(mode === "cloze") out = out.filter(q=>q.type==="cloze");
+  if(mode === "short") out = out.filter(q=>q.type==="short");
+
+  return out.slice(0, Number(maxQEl.value));
+}
+
+/* —————————————————————— Render Questions —————————————————————— */
+function renderQuestions(arr){
+  qList.innerHTML="";
+  arr.forEach((q,i)=>{
+    const card = document.createElement("div");
+    card.className="q-card";
+
+    let html = `<b>${i+1}. ${q.q}</b>`;
+
+    if(q.choices){
+      html += `<ol class="choices">
+        ${q.choices.map(c => `<li>${c}</li>`).join("")}
+      </ol>`;
+      html += `<div class="answer">Answer: ${q.answer}</div>`;
+    }
+
+    if(q.answer && !q.choices){
+      html += `<div class="answer">Answer: ${q.answer}</div>`;
+    }
+
+    card.innerHTML = html;
+    qList.appendChild(card);
+  });
+}
+
+/* —————————————————————— Process Button —————————————————————— */
+processBtn.onclick = async () => {
+  const file = fileInput.files[0];
+  if(!file){ setStatus("Please select a file."); return; }
+
+  setStatus("Processing...");
+  showProgress(true);
+  setProgress(10);
+
+  let text = "";
+  if(file.type === "application/pdf"){
+    text = await extractPDFText(file);
+    if(text.length < 20){
+      setStatus("Running OCR for scanned PDF...");
+      text = await runOCR(await pdfToImage(file));
+    }
+  } else {
+    setStatus("Running OCR on image...");
+    text = await runOCR(file);
+  }
+
+  setProgress(60);
+
+  const qs = generateQuestions(text);
+  renderQuestions(qs);
+
+  summary.textContent = `${qs.length} questions generated.`;
+
+  setProgress(100);
+  setTimeout(()=>showProgress(false),400);
+  setStatus("Completed.");
+};
+
+/* —————————————————————— Clear —————————————————————— */
+clearBtn.onclick = () => {
+  qList.innerHTML="";
+  summary.textContent="No questions yet";
+  setStatus("Waiting for input…");
+  progressFill.style.width="0";
+  fileInput.value="";
+};
+</script>
+
+</body>
+</html>
