@@ -278,14 +278,16 @@ hr {
 </div>
 
 <script>
+
 document.addEventListener("DOMContentLoaded", () => {
+
     const profilePic = document.getElementById("profile-picture");
     const upload = document.getElementById("upload-photo");
     const saveBtn = document.getElementById("save-btn");
     const removeBtn = document.getElementById("remove-photo");
 
-    const fieldIds = ["name", "school", "class", "age", "favsubject"]; // student details
-
+    // ---------------- LOAD SAVED DATA ----------------
+    
     // Load saved profile photo
     const storedPhoto = sessionStorage.getItem("profilePhoto");
     if (storedPhoto) {
@@ -293,16 +295,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Load saved text fields
-    fieldIds.forEach(id => {
-        const input = document.getElementById(id);
-        if (!input) return;
-        const storedValue = sessionStorage.getItem("profile_" + id);
-        if (storedValue !== null) {
-            input.value = storedValue;
-        }
-    });
+    document.getElementById("name").value =
+        sessionStorage.getItem("profileName") || "";
 
-    // Handle upload photo
+    document.getElementById("school").value =
+        sessionStorage.getItem("profileSchool") || "";
+
+    document.getElementById("class").value =
+        sessionStorage.getItem("profileClass") || "";
+
+    document.getElementById("age").value =
+        sessionStorage.getItem("profileAge") || "";
+
+    document.getElementById("favsubject").value =
+        sessionStorage.getItem("profileFavSubject") || "";
+
+    // ---------------- HANDLE UPLOAD ----------------
     upload.addEventListener("change", (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -314,28 +322,32 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.readAsDataURL(file);
     });
 
-    // Handle remove photo
+    // ---------------- HANDLE REMOVE PHOTO ----------------
     removeBtn.addEventListener("click", () => {
         profilePic.src = "default_profile.png";
         sessionStorage.removeItem("profilePhoto");
     });
 
-    // Handle save
+    // ---------------- HANDLE SAVE BUTTON ----------------
     saveBtn.addEventListener("click", () => {
-        // Save profile image
+
+        // Save profile photo
         sessionStorage.setItem("profilePhoto", profilePic.src);
 
-        // Save input fields
-        fieldIds.forEach(id => {
-            const input = document.getElementById(id);
-            if (!input) return;
-            sessionStorage.setItem("profile_" + id, input.value.trim());
-        });
+        // Save correct fields
+        sessionStorage.setItem("profileName", document.getElementById("name").value.trim());
+        sessionStorage.setItem("profileSchool", document.getElementById("school").value.trim());
+        sessionStorage.setItem("profileClass", document.getElementById("class").value.trim());
+        sessionStorage.setItem("profileAge", document.getElementById("age").value.trim());
+        sessionStorage.setItem("profileFavSubject", document.getElementById("favsubject").value.trim());
 
         alert("Profile updated!");
         window.location.href = "dashboard.html";
     });
+
 });
+
+
 </script>
 </body>
 </html>
