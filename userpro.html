@@ -3,218 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Profile</title>
+<title>Edit Profile – AlgoPlay</title>
 
 <style>
-/* ---------- GLOBAL BACKGROUND (Matches Dashboard) ---------- */
-body {
-    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
-    margin: 0;
-    padding: 40px 15px;
-    min-height: 100vh;
-
-    background: linear-gradient(180deg, #d7d41d, #c1f147);
-    animation: bgShift 8s ease-in-out infinite;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@keyframes bgShift {
-    0%,100% { background: linear-gradient(180deg,#bcb26e,#7f6baa); }
-    50%     { background: linear-gradient(180deg,#4ead79,#248aa0); }
-}
-
-/* ---------- GLOBAL BACKGROUND ---------- */
+/* ================= GLOBAL STYLES ================= */
 body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 40px 15px;
     min-height: 100vh;
-
-    background: linear-gradient(180deg,#0f2b56,#0277bd);  /* BODY COLOR */
+    background: linear-gradient(180deg, #0f2b56, #0277bd);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* ---------- CONTAINER (SEPARATE COLOR) ---------- */
 .container {
     width: 90%;
     max-width: 1100px;
-
-    background: #ffffff;   /* WHITE CARD */
-    border-radius: 22px;
-    padding: 30px;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.2);
-    animation: fadeUp 8s ease-in-out infinite;
-}
-@keyframes fadeup {
-    0%,100% { background: linear-gradient(180deg,#a82d90,#7f6baa); }
-    50%     { background: linear-gradient(180deg,#814650,#964a7e); }
-}
-/* ---------- HEADING ---------- */
-h2 {
-    color: #0f2b56;
-    margin-top: 0;
-    font-size: 1.9rem;
-    font-weight: 800;
-    text-align: center;
-}
-
-/* ---------- PROFILE PIC ---------- */
-.profile-pic {
-    width: 250px;
-    height: 140px;
-    border-radius: 20px;
-    object-fit: cover;
-    border: 4px solid #0277bd;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-/* ---------- BUTTONS ---------- */
-.btn {
-    padding: 12px 25px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-weight: 700;
-    margin: 8px;
-    color: white;
-}
-
-.upload-btn  { background: #1976D2; }
-.remove-btn  { background: #d32f2f; }
-.save-btn    { background: #43a047; width: 48%; }
-.cancel-btn  { background: #757575; width: 48%; }
-
-/* ---------- INPUTS ---------- */
-label {
-    margin-top: 15px;
-    font-weight: 700;
-    color: #122230;
-}
-
-.input-field {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #cfd8dc;
-    font-size: 1rem;
-    transition: 0.2s;
-}
-
-.input-field:focus {
-    border-color: #1976D2;
-    box-shadow: 0 0 10px rgba(25,118,210,0.2);
-    outline: none;
-}
-
-/* Center fix */
-center { display: flex; flex-direction: column; align-items: center; }
-
-
-/* ---------- MAIN CARD ---------- */
-.container {
-    width: 90%;
-    max-width: 1100px;
-    height: auto;
-
-    background: rgba(56, 169, 206, 0.12);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 22px;
     padding: 28px 24px;
-    backdrop-filter: blur(15px);
-
-    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
     animation: fadeUp 0.6s ease;
 }
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-
-/* ---------- HEADING ---------- */
+/* ================= HEADER ================= */
 h2 {
-    margin: 0 0 20px;
     text-align: center;
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: 800;
-    color: #bfff00;
+    color: #c6ff4d;
+    margin-bottom: 10px;
 }
 
-/* ---------- PROFILE IMAGE ---------- */
+.subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #e8f7ff;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+/* ================= PROFILE PICTURE ================= */
 .profile-pic {
-    width: 150px;
-    height: 140px;
-    
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
-
-    background: linear-gradient(135deg,#d57557,#ff5722);
-    padding: 5px;
-
-    box-shadow: 0 12px 28px rgba(255,112,67,0.35);
-
-    animation: pulse 2s ease-in-out infinite;
+    border: 5px solid rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #ff8a50, #ff5722);
+    box-shadow: 0 18px 30px rgba(255, 112, 67, 0.45);
+    animation: pulse 2.2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50%     { transform: scale(1.05); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
-/* ---------- BUTTONS ---------- */
+center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons-group {
+    gap: 30px;
+    margin-top: 18px;
+    margin-bottom:30px;
+    justify-content: center;
+    display:flex;
+    justify-content: space-between;
+}
+
+/* ================= BUTTONS ================= */
 .btn {
-    padding: 12px 25px;
-    border-radius: 16px;
+    padding: 19px 3px;
+    border-radius: 14px;
     border: none;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 700;
-    margin: 8px;
-    transition: 0.3s ease;
+    transition: 0.25s ease;
 }
 
-/* Upload photo */
 .upload-btn {
-    background: linear-gradient(90deg,#32db18,#42A5F5);
-    color: white;
+    background: linear-gradient(90deg, #1de945, #42a5f5);
+    color: #fff;
+    width:150px;
+    margin-bottom:20px;
 }
-.upload-btn:hover { transform: translateY(-3px); }
+.upload-btn:hover { transform: translateY(-4px); }
 
-/* Remove photo */
+/* same size as Upload now */
 .remove-btn {
-    background: linear-gradient(90deg,#da2828,#ff1744);
-    color: white;
+    background: linear-gradient(90deg, #ff5252, #ff1744);
+    color: #fff;
+    width:150px;
+    height:60px;
+    margin-top:20px;
 }
-.remove-btn:hover { transform: translateY(-3px); }
+.remove-btn:hover { transform: translateY(-4px); }
 
-/* Save & Cancel buttons layout */
-.save-btn, .cancel-btn {
+.save-btn,
+.cancel-btn {
     width: 48%;
 }
 
-/* Save */
 .save-btn {
-    background: linear-gradient(90deg,#4CAF50,#81C784);
-    color: white;
+    background: linear-gradient(90deg, #43a047, #81c784);
+    color: #fff;
 }
-.save-btn:hover { transform: translateY(-3px); }
+.save-btn:hover { transform: translateY(-4px); }
 
-/* Cancel */
 .cancel-btn {
-    background: linear-gradient(90deg,#757575,#9e9e9e);
-    color: white;
+    background: linear-gradient(90deg, #757575, #9e9e9e);
+    color: #fff;
 }
-.cancel-btn:hover { transform: translateY(-3px); }
+.cancel-btn:hover { transform: translateY(-4px); }
 
-/* ---------- LABELS & INPUTS ---------- */
+/* ================= INPUT FIELDS ================= */
 label {
     display: block;
-    margin-top: 18px;
+    margin-top: 20px;
     font-weight: 700;
     color: #e8f4ff;
 }
@@ -223,76 +141,136 @@ label {
     width: 100%;
     padding: 12px;
     border-radius: 14px;
-    margin-top: 7px;
-
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.22);
     border: none;
     color: #fff;
     font-size: 1rem;
-
+    margin-top: 8px;
     backdrop-filter: blur(10px);
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 .input-field:focus {
-    background: rgba(255,255,255,0.4);
-    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
     outline: none;
 }
 
-/* ---------- LINE ---------- */
 hr {
     height: 1px;
     border: none;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
     margin: 25px 0;
 }
 
-/* center fix */
-center {
+/* ================= BADGES (Premium Style) ================= */
+.badges-section-title {
+    margin-top: 25px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #c6ff4d;
+}
+
+.badges-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.badge {
+    display: flex;
     align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.3s ease;
+    cursor: default;
 }
-.buttons-group {
-    margin-top: 15px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
+
+.badge:hover {
+    transform: translateY(-3px) scale(1.03);
 }
 
+.badge.gold {
+    background: linear-gradient(135deg, #ffd700, #ffb300);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.35);
+}
 
+.badge.silver {
+    background: linear-gradient(135deg, #dcdcdc, #aeb0b4);
+    box-shadow: 0 5px 15px rgba(200, 200, 200, 0.3);
+}
 
+.badge.bronze {
+    background: linear-gradient(135deg, #cd7f32, #9c5521);
+    box-shadow: 0 5px 15px rgba(205, 127, 50, 0.35);
+}
+
+.badge.diamond {
+    background: linear-gradient(135deg, #00eaff, #00bcd4);
+    box-shadow: 0 5px 20px rgba(0, 238, 255, 0.45);
+}
+
+.badge.ruby {
+    background: linear-gradient(135deg, #ff1744, #d50032);
+    box-shadow: 0 5px 20px rgba(255, 23, 68, 0.45);
+}
+
+.badge.emerald {
+    background: linear-gradient(135deg, #00e676, #00c853);
+    box-shadow: 0 5px 20px rgba(0, 230, 118, 0.45);
+}
 </style>
 </head>
 
 <body>
-
 <div class="container">
     <h2>Edit Profile</h2>
+    <p class="subtitle">Update your AlgoPlay account details</p>
 
     <center>
-        <img id="profile-picture" src="default_profile.png" class="profile-pic"><br><br>
-<div class="buttons-group">
-        <label class="btn upload-btn">
-            Upload Photo
-            <input type="file" id="upload-photo" accept="image/*" hidden>
-        </label>
-
-        <button class="btn remove-btn" id="remove-photo">Remove Photo</button>
-    </div>
+        <img id="profile-picture" src="default_profile.png" class="profile-pic"><br>
+        <div class="buttons-group">
+            <label class="btn upload-btn">
+                Upload Photo
+                <input type="file" id="upload-photo" accept="image/*" hidden>
+            </label>
+            <button class="btn remove-btn" id="remove-photo">Remove</button>
+        </div>
     </center>
 
-    <hr><br>
+    <hr>
 
     <label>Your Name</label>
-    <input id="name" class="input-field" type="text">
+    <input id="name" class="input-field" type="text" placeholder="Enter your full name">
 
     <label>School Name</label>
-    <input id="school" class="input-field" type="text">
+    <input id="school" class="input-field" type="text" placeholder="Enter school name">
 
     <label>Class</label>
-    <input id="class" class="input-field" type="text">
+    <input id="class" class="input-field" type="text" placeholder="Ex: 8-B">
+
+    <label>Age</label>
+    <input id="age" class="input-field" type="number" placeholder="Enter your age">
+
+    <label>Favorite Subject</label>
+    <input id="favsubject" class="input-field" type="text" placeholder="Ex: Math, Science">
+
+    <label class="badges-section-title">Your AlgoPlay Badges</label>
+    <div class="badges-container">
+        <div class="badge diamond">🔷 Master Mind</div>
+        <div class="badge gold">🏆 AlgoPlay Pioneer</div>
+        <div class="badge emerald">💡 Critical Thinker</div>
+        <div class="badge silver">🥈 Problem Solver</div>
+        <div class="badge ruby">🔥 Streak Champion</div>
+        <div class="badge bronze">🥉 Logic Beginner</div>
+    </div>
 
     <br><br>
     <button class="btn save-btn" id="save-btn">Save Changes</button>
@@ -301,61 +279,63 @@ center {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-
     const profilePic = document.getElementById("profile-picture");
     const upload = document.getElementById("upload-photo");
+    const saveBtn = document.getElementById("save-btn");
+    const removeBtn = document.getElementById("remove-photo");
 
-    // Load previous saved info
-    if (sessionStorage.getItem("profilePhoto")) {
-        profilePic.src = sessionStorage.getItem("profilePhoto");
+    const fieldIds = ["name", "school", "class", "age", "favsubject"]; // student details
+
+    // Load saved profile photo
+    const storedPhoto = sessionStorage.getItem("profilePhoto");
+    if (storedPhoto) {
+        profilePic.src = storedPhoto;
     }
-    document.getElementById("name").value = sessionStorage.getItem("profileName") || "";
-    document.getElementById("school").value = sessionStorage.getItem("profileSchool") || "";
-    document.getElementById("class").value = sessionStorage.getItem("profileClass") || "";
 
-    // Upload photo
-    upload.onchange = e => {
+    // Load saved text fields
+    fieldIds.forEach(id => {
+        const input = document.getElementById(id);
+        if (!input) return;
+        const storedValue = sessionStorage.getItem("profile_" + id);
+        if (storedValue !== null) {
+            input.value = storedValue;
+        }
+    });
+
+    // Handle upload photo
+    upload.addEventListener("change", (e) => {
         const file = e.target.files[0];
-        const reader = new FileReader();
+        if (!file) return;
 
-        reader.onload = event => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
             profilePic.src = event.target.result;
         };
         reader.readAsDataURL(file);
-    };
+    });
 
-    // Remove photo
-    document.getElementById("remove-photo").onclick = () => {
+    // Handle remove photo
+    removeBtn.addEventListener("click", () => {
         profilePic.src = "default_profile.png";
         sessionStorage.removeItem("profilePhoto");
-    };
+    });
 
-    // Save all
-    document.getElementById("save-btn").onclick = () => {
+    // Handle save
+    saveBtn.addEventListener("click", () => {
+        // Save profile image
         sessionStorage.setItem("profilePhoto", profilePic.src);
-        sessionStorage.setItem("profileName", document.getElementById("name").value);
-        sessionStorage.setItem("profileSchool", document.getElementById("school").value);
-        sessionStorage.setItem("profileClass", document.getElementById("class").value);
 
-        alert("Profile Updated!");
+        // Save input fields
+        fieldIds.forEach(id => {
+            const input = document.getElementById(id);
+            if (!input) return;
+            sessionStorage.setItem("profile_" + id, input.value.trim());
+        });
+
+        alert("Profile updated!");
         window.location.href = "dashboard.html";
-    };
-
+    });
 });
-const savedPhoto = sessionStorage.getItem("profilePhoto");
-
-if (savedPhoto) {
-    // Note: The original code used a non-existent ID "avatar" here, 
-    // but since the HTML and JS were locked, I couldn't correct it to match
-    // the main profile-picture ID. The intent here is to style the saved photo.
-    // However, since the HTML structure is fixed, this block remains ineffective 
-    // unless the HTML is modified to include an element with the ID "avatar".
-    /* document.getElementById("avatar").innerHTML = `
-        <img src="${savedPhoto}" 
-              style="width: 100%; height: 100%; border-radius: 18px; object-fit: cover;">
-    `;
-    */
-}
 </script>
 </body>
 </html>
